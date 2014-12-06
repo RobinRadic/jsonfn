@@ -32,45 +32,24 @@
 
 (function (exports) {
 
+    exports.stringify = function (obj) {
 
-
-    exports.stringify = function(obj) {
-
-        //Original Stringify
-        var partialStringify = function (obj) {
-
-            return JSON.stringify(obj, function (key, value) {
-
-                if (value instanceof Function || typeof value == 'function') {
-                    return value.toString();
-                }
-                if (value instanceof RegExp) {
-                    return '_PxEgEr_' + value;
-                }
-                return value;
-            });
-        };
-
-        //Calculate normal return
-        var normal = partialStringify(obj);
-        //Stringify prototype
-        var proto = obj.__proto__? this.stringify(obj.__proto__): "";
-
-        //If prototype was not {} empty
-        if( proto.length > 2 ) {
-            //Slide the brackets and put a coma in between
-            return normal.slice(0,-1) + ', "__proto__" : ' + proto + '}';
-        } else {
-            return normal;
-        }
-
+        return JSON.stringify(obj, function (key, value) {
+            if (value instanceof Function || typeof value == 'function') {
+                return value.toString();
+            }
+            if (value instanceof RegExp) {
+                return '_PxEgEr_' + value;
+            }
+            return value;
+        });
     };
 
     exports.parse = function (str, date2obj) {
 
         var iso8061 = date2obj ? /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/ : false;
 
-        var obj = JSON.parse(str, function (key, value) {
+        return JSON.parse(str, function (key, value) {
             var prefix;
 
             if (typeof value != 'string') {
@@ -94,15 +73,6 @@
 
             return value;
         });
-
-        if( obj.__proto__ ) {
-            var n = obj.__proto__;
-            delete obj.__proto__;
-
-            obj.__proto__ = n;
-        }
-
-        return obj;
     };
 
     exports.clone = function (obj, date2obj) {
@@ -110,5 +80,4 @@
     };
 
 }(typeof exports === 'undefined' ? (window.JSONfn = {}) : exports));
-
 
