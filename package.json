@@ -1,17 +1,17 @@
 {
-  "name": "json-fn",
-  "version": "0.60.00",
+  "name": "jsonfn-bower",
+  "version": "0.6.1",
   "author": "Vadim Kiryukhin <vkiryukhin@gmail.com>",
   "description": "javascript plugin to stringify, parse and clone javascript objects with Functions, RegExp and Date.",
-  "contributors": [ 
+  "contributors": [
     {
       "name": "Vadim Kiryukhin",
       "email": "vkiryukhin@gmail.com"
-    } 
+    }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vkiryukhin/jsonfn"
+    "url": "https://github.com/robinradic/jsonfn"
   },
   "main":"./jsonfn",
   "keywords": [
